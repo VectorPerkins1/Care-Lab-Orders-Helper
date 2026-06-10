@@ -1,5 +1,5 @@
 // ==UserScript==
-// @version      1.0.0
+// @version      1.0.1
 // @updateURL    https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @downloadURL  https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @name         Care Lab Orders Helper
@@ -768,6 +768,7 @@ const POSTOP_XRAY_TYPES = [
     { key: "femur", label: "Μηριαίο" },
     { key: "forearm", label: "Αντιβράχιο" },
     { key: "shoulder", label: "Ώμος" },
+    { key: "elbow", label: "Αγκώνας" },
     { key: "humerus", label: "Βραχιόνιο" },
     { key: "foot", label: "Άκρος πόδας" },
     { key: "hand", label: "Άκρα χείρα" }
