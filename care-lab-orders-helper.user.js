@@ -1,7 +1,7 @@
 // ==UserScript==
 // @version      1.0.0
-// @updateURL    https://raw.githubusercontent.com/USERNAME/care-lab-orders-helper/main/care-lab-orders-helper.user.js
-// @downloadURL  https://raw.githubusercontent.com/USERNAME/care-lab-orders-helper/main/care-lab-orders-helper.user.js
+// @updateURL    https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
+// @downloadURL  https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @name         Care Lab Orders Helper
 // @match        *://care.ghl.medical:51021/*
 // @match        *://10.136.33.126:51021/*
