@@ -1,5 +1,5 @@
 // ==UserScript==
-// @version      1.3.0
+// @version      1.3.1
 // @updateURL    https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @downloadURL  https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @name         Care Lab Orders Helper
