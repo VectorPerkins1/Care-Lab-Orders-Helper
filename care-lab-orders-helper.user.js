@@ -1,5 +1,5 @@
 // ==UserScript==
-// @version      1.3.1
+// @version      1.3.2
 // @updateURL    https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @downloadURL  https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @name         Care Lab Orders Helper
@@ -240,11 +240,8 @@
 
             let bed = "?";
 
-            const miniCellIndex = cells.indexOf(mini);
-
-            for (let i = miniCellIndex + 1; i < cells.length; i++) {
-                const t = cleanText(cells[i]);
-
+            for (const cell of cells) {
+                const t = cleanText(cell);
                 if (/^\d{1,2}$/.test(t)) {
                     bed = t;
                     break;
@@ -252,19 +249,38 @@
             }
 
             let room = "?";
-            let prev = row.previousElementSibling;
 
-            while (prev) {
-                const prevText = cleanText(prev);
+            // Πρώτα ψάχνουμε στην ίδια γραμμή
+            for (const cell of cells) {
+                const t = cleanText(cell);
+                const match = t.match(/^(\d{3})\s*\[/);
 
-                const roomMatch = prevText.match(/^\s*(\d{3})\s*\[/);
-
-                if (roomMatch) {
-                    room = roomMatch[1];
+                if (match) {
+                    room = match[1];
                     break;
                 }
+            }
 
-                prev = prev.previousElementSibling;
+            // Αν δεν βρεθεί, ψάχνουμε προς τα πάνω
+            if (room === "?") {
+                let prev = row.previousElementSibling;
+
+                while (prev) {
+                    const prevCells = [...prev.querySelectorAll("td")];
+
+                    for (const c of prevCells) {
+                        const t = cleanText(c);
+                        const match = t.match(/^(\d{3})\s*\[/);
+
+                        if (match) {
+                            room = match[1];
+                            prev = null;
+                            break;
+                        }
+                    }
+
+                    if (prev) prev = prev.previousElementSibling;
+                }
             }
 
             const patientName = getNearbyPatientName(row, encounterNr);
