@@ -239,9 +239,13 @@
             const cells = [...row.querySelectorAll("td")];
 
             let bed = "?";
-            for (const cell of cells) {
-                const t = cleanText(cell);
-                if (/^\d{1,3}$/.test(t)) {
+
+            const miniCellIndex = cells.indexOf(mini);
+
+            for (let i = miniCellIndex + 1; i < cells.length; i++) {
+                const t = cleanText(cells[i]);
+
+                if (/^\d{1,2}$/.test(t)) {
                     bed = t;
                     break;
                 }
@@ -251,20 +255,16 @@
             let prev = row.previousElementSibling;
 
             while (prev) {
-                const prevCells = [...prev.querySelectorAll("td")];
+                const prevText = cleanText(prev);
 
-                for (const c of prevCells) {
-                    const t = cleanText(c);
-                    const match = t.match(/^(\d+)\s*\[[^\]]+\]$/);
+                const roomMatch = prevText.match(/^\s*(\d{3})\s*\[/);
 
-                    if (match) {
-                        room = match[1];
-                        prev = null;
-                        break;
-                    }
+                if (roomMatch) {
+                    room = roomMatch[1];
+                    break;
                 }
 
-                if (prev) prev = prev.previousElementSibling;
+                prev = prev.previousElementSibling;
             }
 
             const patientName = getNearbyPatientName(row, encounterNr);
