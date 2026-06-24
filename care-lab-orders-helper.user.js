@@ -1,5 +1,5 @@
 // ==UserScript==
-// @version      1.3.2
+// @version      1.3.3
 // @updateURL    https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @downloadURL  https://raw.githubusercontent.com/VectorPerkins1/Care-Lab-Orders-Helper/main/care-lab-orders-helper.user.js
 // @name         Care Lab Orders Helper
@@ -1303,6 +1303,12 @@ function buildXrayPrintUrl(encounterNr, batchNr) {
         encodeURIComponent(batchNr);
 }
 
+function buildMedicalInstructionsUrl(encounterNr) {
+    return window.location.origin +
+        "/modules/pdfmaker/nursing/doctors_orders_odipy.php?encounter_nr=" +
+        encodeURIComponent(encounterNr);
+}
+
 function admissionLog(msg) {
     const doc = getNursingFrame().document;
     const box = doc.getElementById("admission-log");
@@ -1665,6 +1671,12 @@ async function sendAdmissionOrders() {
 
                 if (r.success) {
                     admissionLog(`✅ ${label} → batch ${r.batch_nr}`);
+
+                    addPrintLink(
+                    printTab,
+                    `Ιατρικές Οδηγίες - ${label}`,
+                    buildMedicalInstructionsUrl(encounterNr)
+                );
 
                     if (pentada) {
                         await openABOFormForBatch(
